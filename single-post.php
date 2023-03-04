@@ -1,6 +1,6 @@
 <?php
 /**
- * This is a file.
+ * Template for the single book custom type.
  *
  * @package WordPress
  */
