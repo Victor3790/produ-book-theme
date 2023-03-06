@@ -3,6 +3,8 @@
  * Functions for the theme.
  *
  * @package WordPress
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -3,6 +3,8 @@
  * Not found template.
  *
  * @package WordPress
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  */
 
 ?>

@@ -3,6 +3,8 @@
  * Template for the single book custom type.
  *
  * @package WordPress
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  */
 
 ?>
