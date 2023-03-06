@@ -12,7 +12,7 @@ $post_comments = get_comments(
 	array(
 		'post_id' => get_the_ID(),
 		'status'  => 'approve',
-		'number'  => 10,
+		'number'  => 15, // Get the last 15 comments, pagination pending.
 	)
 );
 ?>
