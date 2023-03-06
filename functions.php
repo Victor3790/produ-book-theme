@@ -1,9 +1,30 @@
 <?php
 /**
- * Functions fot the theme.
+ * Functions for the theme.
  *
  * @package WordPress
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	die();
+}
+
+require get_template_directory() . '/includes/class-my-theme-walker-nav-menu.php';
+
+/**
+ * Echo the main menu.
+ */
+function echo_my_theme_main_menu(): void {
+
+	wp_nav_menu(
+		array(
+			'menu'       => 'Primary',
+			'container'  => 'ul',
+			'menu_class' => 'navbar-nav ms-auto mb-2 mb-lg-0',
+			'walker'     => new My_Theme_Walker_Nav_Menu(),
+		)
+	);
+}
 
 /**
  * Add new features not included by default.
