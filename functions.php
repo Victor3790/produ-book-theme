@@ -39,6 +39,8 @@ function add_features(): void {
 	// Custom image sizes.
 	add_image_size( 'my_theme_thumbnail', 700, 350, true );
 	add_image_size( 'my_theme_feature_image', 900, 400, true );
+	add_image_size( 'my_theme_book_thumbnail', 250, 300, false );
+	add_image_size( 'my_theme_book_feature_image', 500, 600, false );
 
 }
 

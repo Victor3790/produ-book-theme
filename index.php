@@ -72,8 +72,14 @@
 
 				while ( have_posts() ) {
 
+					$current_post_type = 'post';
+
+					if ( is_post_type_archive( 'books' ) ) {
+						$current_post_type = 'book';
+					}
+
 					the_post();
-					get_template_part( 'template-parts/post-card' );
+					get_template_part( 'template-parts/card', $current_post_type );
 
 				}
 			}
