@@ -33,7 +33,9 @@
 
 			<?php get_search_form(); ?>
 
-			<?php get_template_part( 'template-parts/categories' ); ?>
+			<?php get_template_part( 'template-parts/categories', 'post' ); ?>
+
+			<?php get_template_part( 'template-parts/categories', 'book' ); ?>
 
 		</div>
 	</div>

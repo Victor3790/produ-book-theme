@@ -74,7 +74,7 @@
 
 					$current_post_type = 'post';
 
-					if ( is_post_type_archive( 'books' ) ) {
+					if ( is_post_type_archive( 'books' ) || is_tax( 'book_categories' ) ) {
 						$current_post_type = 'book';
 					}
 
@@ -96,7 +96,9 @@
 
 			<?php get_search_form(); ?>
 
-			<?php get_template_part( 'template-parts/categories' ); ?>
+			<?php get_template_part( 'template-parts/categories', 'post' ); ?>
+
+			<?php get_template_part( 'template-parts/categories', 'book' ); ?>
 
 		</div>
 	</div>
