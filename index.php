@@ -74,7 +74,7 @@
 
 					$current_post_type = 'post';
 
-					if ( is_post_type_archive( 'books' ) || is_tax( 'book_categories' ) ) {
+					if ( is_post_type_archive( 'books' ) || is_tax( 'book_categories' ) || is_search() ) {
 						$current_post_type = 'book';
 					}
 

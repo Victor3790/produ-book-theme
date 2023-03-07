@@ -195,7 +195,7 @@ add_action( 'init', 'register_book_post_type' );
  *
  * @throws Exception Throws an exception if the nonce is not correct.
  */
-function save_rating_data( $comment_id, $comment_approved, $comment_data ) {
+function save_rating_data( $comment_id, $comment_approved, $comment_data ): void {
 
 	if ( empty( $_POST['book-rating'] ) ) {
 
@@ -219,3 +219,82 @@ function save_rating_data( $comment_id, $comment_approved, $comment_data ) {
 }
 
 add_action( 'comment_post', 'save_rating_data', 10, 3 );
+
+/**
+ * Add custom query vars for book search.
+ *
+ * @param array $vars The query variables.
+ */
+function add_search_query_vars( $vars ): array {
+
+	$vars[] = 'book_author';
+	$vars[] = 'book_category';
+	$vars[] = 'min-price';
+	$vars[] = 'max-price';
+
+	return $vars;
+
+}
+
+add_filter( 'query_vars', 'add_search_query_vars' );
+
+/**
+ * Perform the book custom search.
+ *
+ * @param WP_Query $query The WordPress query.
+ */
+function customize_search_query( $query ): void {
+
+	if ( ! is_search() ) {
+		return;
+	}
+
+	$author    = sanitize_text_field( get_query_var( 'book_author' ) );
+	$category  = sanitize_text_field( get_query_var( 'book_category' ) );
+	$min_price = sanitize_text_field( get_query_var( 'min-price' ) );
+	$max_price = sanitize_text_field( get_query_var( 'max-price' ) );
+
+	$tax_query  = array();
+	$meta_query = array();
+
+	// Assign custom queries.
+	if ( ! empty( $category ) ) {
+		$tax_query[] = array(
+			'taxonomy' => 'book_categories',
+			'field'    => 'slug',
+			'terms'    => $category,
+		);
+	}
+
+	if ( ! empty( $min_price ) && ! empty( $max_price ) ) {
+		$meta_query[] = array(
+			'key'     => 'precio',
+			'value'   => array( $min_price, $max_price ),
+			'compare' => 'BETWEEN',
+			'type'    => 'NUMERIC',
+		);
+	}
+
+	if ( ! empty( $author ) ) {
+		$meta_query[] = array(
+			'key'   => 'autor',
+			'value' => $author,
+		);
+	}
+
+	// Set custom query parameters.
+	if ( count( $meta_query ) > 1 ) {
+		$meta_query['relation'] = 'AND';
+	}
+
+	if ( count( $meta_query ) > 0 ) {
+		$query->set( 'meta_query', $meta_query );
+	}
+
+	if ( count( $tax_query ) > 0 ) {
+		$query->set( 'tax_query', $tax_query );
+	}
+
+}
+
+add_action( 'pre_get_posts', 'customize_search_query' );
