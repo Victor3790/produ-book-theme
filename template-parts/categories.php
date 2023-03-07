@@ -13,7 +13,7 @@ $category_groups = array_chunk( $categories, $chunk_size );
 
 <!-- Categories widget-->
 <div class="card mb-4">
-	<div class="card-header">Categories</div>
+	<div class="card-header">Categorías en nuestro blog.</div>
 	<div class="card-body">
 		<div class="row">
 			<?php foreach ( $category_groups as $group ) : ?>

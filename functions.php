@@ -106,10 +106,11 @@ function sanitize_search( $query_object ): void {
 add_action( 'parse_query', 'sanitize_search' );
 
 /**
- * Add Book custom post type.
+ * Add Book custom post type and its categories.
  */
 function register_book_post_type(): void {
 
+	// Register post type.
 	$labels = array(
 		'name'          => __( 'Books', '' ),
 		'singular_name' => __( 'book', '' ),
@@ -143,6 +144,36 @@ function register_book_post_type(): void {
 	);
 
 	register_post_type( 'books', $args );
+
+	// Register categories.
+	$category_labels = array(
+		'name'          => __( 'Book categories', '' ),
+		'singular_name' => __( 'Category', '' ),
+	);
+
+	$category_args = array(
+		'label'                 => __( 'Categories', '' ),
+		'labels'                => $category_labels,
+		'public'                => true,
+		'publicly_queryable'    => true,
+		'hierarchical'          => false,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'show_in_nav_menus'     => true,
+		'query_var'             => true,
+		'rewrite'               => array(
+			'slug'       => 'book_categories',
+			'with_front' => true,
+		),
+		'show_admin_column'     => false,
+		'show_in_rest'          => true,
+		'rest_base'             => 'book_categories',
+		'rest_controller_class' => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'    => false,
+		'show_in_graphql'       => false,
+	);
+
+	register_taxonomy( 'book_categories', array( 'books' ), $category_args );
 
 }
 
