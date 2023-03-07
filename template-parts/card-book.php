@@ -17,9 +17,14 @@
 			</div>
 			<div class="col-7">
 				<div class="card-body">
-					<div class="small text-muted"><?php echo get_the_date(); ?></div>
 					<h2 class="card-title h4"><?php the_title(); ?></h2>
-					<p class="card-text"><?php the_excerpt(); ?></p>
+					<?php if ( function_exists( 'the_field' ) ) : ?>
+						<ul>
+							<li>Autor: <?php the_field( 'autor' ); ?></li>
+							<li>Editorial: <?php the_field( 'editorial' ); ?></li>
+							<li>Precio: $ <?php the_field( 'precio' ); ?></li>
+						</ul>
+					<?php endif; ?>
 					<a class="btn btn-primary" href="<?php the_permalink(); ?>">Read more</a>
 				</div>
 			</div>

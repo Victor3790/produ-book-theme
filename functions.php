@@ -61,6 +61,13 @@ function add_assets(): void {
 	);
 
 	wp_enqueue_style(
+		'my-blog-slider',
+		'//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css',
+		array(),
+		'1.0.0'
+	);
+
+	wp_enqueue_style(
 		'my-blog-star-rating-styles',
 		get_stylesheet_directory_uri() . '/assets/star-rating-svg/css/star-rating-svg.css',
 		array(),
@@ -78,7 +85,7 @@ function add_assets(): void {
 	wp_enqueue_script(
 		'my-blog-script',
 		get_stylesheet_directory_uri() . '/assets/js/my-theme-script.js',
-		array( 'my-blog-star-rating' ),
+		array( 'my-blog-star-rating', 'jquery', 'jquery-ui-core', 'jquery-ui-slider' ),
 		'1.0.0',
 		true
 	);

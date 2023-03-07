@@ -18,7 +18,7 @@ if ( $items > 0 ) {
 
 <!-- Categories widget-->
 <div class="card mb-4">
-	<div class="card-header">Categorías de libros.</div>
+	<div class="card-header">Categorías en el blog.</div>
 	<div class="card-body">
 		<div class="row">
 			<?php if ( 0 === $items ) : ?>
